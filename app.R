@@ -1,9 +1,3 @@
-# git remote add origin https://github.com/sbpollock/Mass_Spec_Targeting.git
-# git branch -M main
-# git push -u origin main
-
-
-
 # 1. Import -----
 
 setwd("/Volumes/RLadies/R/MassSpec")
