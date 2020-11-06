@@ -94,19 +94,25 @@ ui <- fluidPage(
                            
                            column(4,
                             h3("K562",style="color:black"),
-                            h4("YGIVEAR[+2]",style="color:black")),
+                            h4("HLQLAIR[+2]",style="color:black"),
+                            h4("AGFAGDDAPR[+2]",style="color:black"),
+                            h4("STTTGHLIYK[+2]",style="color:black")),
                            
                            column(4,
                             h3("MC38",style="color:black"),
-                            h4("ASMTNMELM[+2]",style="color:black"))
+                            h4("ASMTNMELM[+2]",style="color:black"),
+                            h4("ASMTNM(+15.99)ELM[+2]",style="color:black"),
+                            h4("ASM(+15.99)TNM(+15.99)ELM[+2]",style="color:black"),
+                            h4("AQLANDVVL[+2]",style="color:black"),
+                            h4("ASMTNRELM[+2]",style="color:black"))
                          ),
                          
                         
                          h2("Instructions"),
-                         p("In order to get the script to run you need to do two things, in this order. First, indicate
-                           which targets you want to look for in the text window above. 
-                           Second, indicate which Thermo .raw files you want to
-                           look for the targets in.")
+                         p("In order to get the script to run you need to do two things, in this order: First, indicate
+                           which targets you want to look for by copy-pasting text or writing in the text window above. 
+                           Second, indicate which Thermo .raw files you want to look for the targets in by dragging and
+                           dropping the files into the window (or using the browse button).")
                 ),
                 tabPanel("Targets",
                          tableOutput("table")
@@ -160,17 +166,6 @@ server <- function(input,output,session) {
         # When every sequence has been run, the total mass and b1-25 + y1-25 ions are compiled
         # Into a big dataframe
         # m/z is then calculated below like it was for everything else
-        
-        # How to work up the MS2 plots
-        # Store a variable for MS2 scan number as null
-        # On a click from the user, all MS2 scans within -/+ 3mins that match -/+5ppm
-        # Of the target peptide are chosen, then within those the highest intensity
-        # scan is chosen and the MS2 scan number variable is set
-        # Once that variable is set a labeled graph appears below the RT graph
-        # Then, for that peptide, its b- and y- ions are called up
-        # If a mass matches any b- and y-ions (within 2ppm?) above a certain intensity threshold
-        # (2.5%?) then it is colored green for match and grey for no match
-        # More complex coloration to indicate confidence of a good match, etc. can be included later easily
         
         
         # Extract everything between parentheses out of your vector
@@ -228,7 +223,7 @@ server <- function(input,output,session) {
         
         for (j in 1:length(clean_names)){
             total_sum <- c(total_sum,
-                           sum(to_add[j],summed_residues[j],18.0106,
+                           sum(to_add[j],summed_residues[j],18.0106, # Monoisotopic mass of water is 18.01056Da according to https://dodona.ugent.be/en/exercises/575192986/
                                ppm)) #ppm correction value
         }
         
@@ -310,6 +305,24 @@ server <- function(input,output,session) {
 shinyApp(ui, server)
 
 
+####################
+### FUTURE IDEAS ###
+####################
+
+# How to work up the MS2 plots
+# Store a variable for MS2 scan number as null
+# On a click from the user, all MS2 scans within -/+ 3mins that match -/+5ppm
+# Of the target peptide are chosen, then within those the highest intensity
+# scan is chosen and the MS2 scan number variable is set
+# Once that variable is set a labeled graph appears below the RT graph
+# Then, for that peptide, its b- and y- ions are called up
+# If a mass matches any b- and y-ions (within 2ppm?) above a certain intensity threshold
+# (2.5%?) then it is colored green for match and grey for no match
+# More complex coloration to indicate confidence of a good match, etc. can be included later easily
+
+
+
+
 # It might also be good to make fixed and variable options and charge states,
 # allow the program to make all possible combos and search for them, and 
 # then if the output is below a certain value, remove it from the output so
@@ -320,5 +333,3 @@ shinyApp(ui, server)
 # length(strsplit(test,"[A-Z]",perl=T)[[1]])
 # test2 <- strsplit(test,"\\(",perl=T)[[1]]
 # as.numeric(sub("\\)","",test2[2]))
-
-# Monoisotopic mass of water is 18.01056Da according to https://dodona.ugent.be/en/exercises/575192986/
