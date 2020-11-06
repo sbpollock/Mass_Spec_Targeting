@@ -93,13 +93,11 @@ ui <- fluidPage(
                            h4("QTALVELLK[+2]",style="color:black")),
                            
                            column(4,
-                            h3("K562",style="color:black"),
-                            h4("HLQLAIR[+2]",style="color:black"),
-                            h4("AGFAGDDAPR[+2]",style="color:black"),
-                            h4("STTTGHLIYK[+2]",style="color:black")),
+                            h3("MC38-Global",style="color:black"),
+                            h4("YGYSNRVVDLM[+2]",style="color:black")),
                            
                            column(4,
-                            h3("MC38",style="color:black"),
+                            h3("MC38-MHCI",style="color:black"),
                             h4("ASMTNMELM[+2]",style="color:black"),
                             h4("ASMTNM(+15.99)ELM[+2]",style="color:black"),
                             h4("ASM(+15.99)TNM(+15.99)ELM[+2]",style="color:black"),
@@ -112,7 +110,9 @@ ui <- fluidPage(
                          p("In order to get the script to run you need to do two things, in this order: First, indicate
                            which targets you want to look for by copy-pasting text or writing in the text window above. 
                            Second, indicate which Thermo .raw files you want to look for the targets in by dragging and
-                           dropping the files into the window (or using the browse button).")
+                           dropping the files into the window (or using the browse button). If you need a sample
+                           .raw files, https://www.ebi.ac.uk/pride/archive/projects/PXD009542 is a really nice
+                           PRIDE entry.")
                 ),
                 tabPanel("Targets",
                          tableOutput("table")
@@ -219,7 +219,7 @@ server <- function(input,output,session) {
         # Then sum the between-parentheses values, residue masses, and add
         # N and C termini and that's it
         total_sum <- vector()
-        ppm <- 0.00047 #correction value
+        ppm <- 0 #correction value (0.00047 for my BSA data)
         
         for (j in 1:length(clean_names)){
             total_sum <- c(total_sum,
