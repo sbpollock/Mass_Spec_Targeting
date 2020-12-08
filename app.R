@@ -100,9 +100,12 @@ ui <- fluidPage(
                             h3("MC38-MHCI",style="color:black"),
                             h4("ASMTNMELM[+2]",style="color:black"),
                             h4("ASMTNM(+15.99)ELM[+2]",style="color:black"),
-                            h4("ASM(+15.99)TNM(+15.99)ELM[+2]",style="color:black"),
                             h4("AQLANDVVL[+2]",style="color:black"),
-                            h4("ASMTNRELM[+2]",style="color:black"))
+                            h4("SIIVFNLL[+2]",style="color:black"),
+                            h4("SSPYSLHYL[+2]",style="color:black"),
+                            h4("AALLNSAVL[+2]",style="color:black"),
+                            h4("MAPIDHTTM[+2]",style="color:black"),
+                            h4("DPSSSVLFEY[+2]",style="color:black"))
                          ),
                          
                         
